@@ -1,7 +1,8 @@
 #include <iostream>
+#include <vector>
 
-using namespcae std;
+using namespace std;
 
 int main () {
-	//vamos a morir
+	
 }
