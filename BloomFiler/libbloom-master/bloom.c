@@ -128,13 +128,9 @@ int bloom_init_m(struct bloom * bloom, int entries, int m)
   bloom->bits = m;
   int k = (m/entries)*0.693147180559945; //num of hashes
   bloom->hashes = k;
-  printf("dividing %d by %d\n", entries, m);
-  double em = entries/m;
-  printf("em now is %f\n", em);
+  double em = ((double)entries)/m;
   double expo = exp(-(k)*em);
-  printf("exp now is %f\n", expo);
   double p = (1 - expo);
-  printf("p now is %f\n", p);
   p = pow(p, k);
   bloom->error = p;
 
