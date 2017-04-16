@@ -7,5 +7,5 @@ bloom.o: bloom.h bloom.c
 sha256.o: sha256.h sha256.cpp
 	g++ -c sha256.h sha256.cpp
 
-main: bloom.o MurmurHash2.o sha256.o
+main: bloom.o MurmurHash2.o sha256.o main.cc
 	g++ -o main main.cc bloom.o MurmurHash2.o sha256.o
