@@ -23,7 +23,7 @@ int main () {
 		cout << "Length of entries: ";
 		cin >> length;
         
-
+        
 		cout << "Press 1 to create a Bloom filter by defining the size" << endl;
 		cout << "Press 2 to create a Bloom filter by defining the error" << endl;
 
@@ -81,10 +81,10 @@ int main () {
         int num_falsepositive = 0;
         int num_queries = 0;
         
-        while (n < 1){
+        while (n < 6){
             ++n;
             string query;
-            ifstream testfile ("test" + to_string(n) + ".txt");
+            ifstream testfile ("tests/test" + to_string(n) + ".txt");
             if (testfile.is_open()){
                 while (getline (testfile,query)){
                     ++num_queries;
