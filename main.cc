@@ -89,9 +89,11 @@ int main () {
                 }
             }
         }
+        
         cout << "Total number of queries: " << num_queries << endl;
         cout << "Total number of false positives: " << num_falsepositive << endl;
         cout << "Experimental error: " << (double)num_falsepositive/num_queries << endl;
+        cout << "Theoretical error: " << bloom.error << endl;
     }
     
     
