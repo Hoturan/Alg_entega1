@@ -103,6 +103,8 @@ int main () {
         cout << "Total number of false positives: " << num_falsepositive << endl;
         cout << "Experimental error: " << (double)num_falsepositive/num_queries << endl;
         cout << "Theoretical error: " << bloom.error << endl;
+        
+        bloom_free(&bloom); //free bloom for next use
     }
     
     
