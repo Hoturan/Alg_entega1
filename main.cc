@@ -81,7 +81,7 @@ int main () {
         int num_falsepositive = 0;
         int num_queries = 0;
         
-        while (n < 6){
+        while (n < 7){
             ++n;
             string query;
             ifstream testfile ("tests/test" + to_string(n) + ".txt");
