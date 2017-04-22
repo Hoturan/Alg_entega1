@@ -4,6 +4,7 @@
 #include "sha256.h"
 #include <fstream>
 #include <set>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -21,6 +22,8 @@ int main () {
 		cin >> entries;
 		cout << "Length of entries: ";
 		cin >> length;
+        
+
 		cout << "Press 1 to create a Bloom filter by defining the size" << endl;
 		cout << "Press 2 to create a Bloom filter by defining the error" << endl;
 
@@ -67,7 +70,6 @@ int main () {
         if (myfile.is_open()){
             while (getline (myfile,line)){
                 if (sha) line = sha256(line);
-                //cout << line << " size is " << line.size() << endl;
                 S.insert(line);
                 bloom_add(&bloom, &line, line.size());
                 if (!bloom_check(&bloom, &line, line.size())) entry_error = true;
@@ -75,20 +77,27 @@ int main () {
         }
         if (entry_error) cout << "One or more of the strings hasn't been added succesfully" << endl;
         
+        int n = 0;
         int num_falsepositive = 0;
         int num_queries = 0;
-        ifstream testfile ("test1.txt");
-        if (testfile.is_open()){
-            while (getline (testfile,line)){
-                ++num_queries;
-                if (sha) line = sha256(line);
-                if (bloom_check(&bloom, &line, line.size())) {
-                    if (S.find(line) == S.end()){ //list is found in bloom but is not in S, false positive
-                        ++num_falsepositive;
+        
+        while (n < 1){
+            ++n;
+            string query;
+            ifstream testfile ("test" + to_string(n) + ".txt");
+            if (testfile.is_open()){
+                while (getline (testfile,query)){
+                    ++num_queries;
+                    if (sha) query = sha256(query);
+                    if (bloom_check(&bloom, &query, query.size())) {
+                        if (S.find(query) == S.end()){ //list is found in bloom but is not in S, false positive
+                            ++num_falsepositive;
+                        }
                     }
                 }
             }
         }
+        
         
         cout << "Total number of queries: " << num_queries << endl;
         cout << "Total number of false positives: " << num_falsepositive << endl;
