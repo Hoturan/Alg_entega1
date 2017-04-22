@@ -2,11 +2,14 @@
 #include <vector>
 #include "bloom.h"
 #include "sha256.h"
+#include <fstream>
+#include <set>
 
 using namespace std;
 
-int main () {
 
+int main () {
+    set <string> S;
 	struct bloom bloom;
 	bool finished = false;
 
@@ -42,7 +45,7 @@ int main () {
 			else cout << "Not a vaild command, please type 1 or 2" << endl;
 		}
 
-		if (error == -1)  bloom_init(&bloom, entries, size_bloom); //number of entries/size
+        if (error == -1) {bloom_init_m(&bloom, entries, size_bloom); } //number of entries/size
 		else bloom_init(&bloom, entries, error);
 		cout << "Press 1 to create a Bloom filter without using sha256" << endl;
 		cout << "Press 2 to create a Bloom filter using sha256" << endl;
@@ -58,9 +61,38 @@ int main () {
 			else cout << "Not a vaild command, please type 1 or 2" << endl;
 		}
 
-		if (sha){
-			//Must codify entries with sha256 "MARCANGEL AL RESCATE"
-		}
-
-	}
+        string line;
+        ifstream myfile ("claus.txt");
+        bool entry_error = false;
+        if (myfile.is_open()){
+            while (getline (myfile,line)){
+                if (sha) line = sha256(line);
+                //cout << line << " size is " << line.size() << endl;
+                S.insert(line);
+                bloom_add(&bloom, &line, line.size());
+                if (!bloom_check(&bloom, &line, line.size())) entry_error = true;
+            }
+        }
+        if (entry_error) cout << "One or more of the strings hasn't been added succesfully" << endl;
+        
+        int num_falsepositive = 0;
+        int num_queries = 0;
+        ifstream testfile ("test1.txt");
+        if (testfile.is_open()){
+            while (getline (testfile,line)){
+                ++num_queries;
+                if (sha) line = sha256(line);
+                if (bloom_check(&bloom, &line, line.size())) {
+                    if (S.find(line) == S.end()){ //list is found in bloom but is not in S, false positive
+                        ++num_falsepositive;
+                    }
+                }
+            }
+        }
+        cout << "Total number of queries: " << num_queries << endl;
+        cout << "Total number of false positives: " << num_falsepositive << endl;
+        cout << "Experimental error: " << (double)num_falsepositive/num_queries << endl;
+    }
+    
+    
 }
