@@ -110,22 +110,22 @@ int main () {
     }
     string line;
     ifstream myfile ("claus.txt");
-    time_t before_adding = clock();
-    float time_to_add = 0;
+    float time_to_add;
     bool entry_error = false;
+    time_t add = clock();
     if (myfile.is_open()){
         while (getline (myfile,line)){
             if (opt == 2) line = sha256(line);
             else if (opt == 3) line = md5(line);
             S.insert(line);
             
-            time_t add = clock();
             bloom_add(&bloom, &line, line.size());
-            time_to_add += float(clock() - add) / CLOCKS_PER_SEC;
+            
             
             if (!bloom_check(&bloom, &line, line.size())) entry_error = true;
         }
     }
+    time_to_add = float(clock() - add) / CLOCKS_PER_SEC;
     if (entry_error) cout << "One or more of the strings hasn't been added succesfully" << endl;
     //time_to_add = float(clock() - before_query) / CLOCKS_PER_SEC;
         

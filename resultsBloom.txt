@@ -1,0 +1,61 @@
+Bloom filter 
+
+n = 10 
+Number of hash functions used (optimal k): 4
+Total number of queries: 7257053
+Total number of false positives: 756626
+Experimental error: 0.104261
+Theoretical error (without any encryption): 0.1
+
+Time to add all strings to bloom filter: 2e-05 seconds
+Time to do all querys: 4.86025 seconds
+
+n = 100
+Number of hash functions used (optimal k): 4
+Total number of queries: 7257053
+Total number of false positives: 788329
+Experimental error: 0.108629
+Theoretical error (without any encryption): 0.1
+
+Time to add all strings to bloom filter: 0.000106 seconds
+Time to do all querys: 5.032 seconds
+
+n = 1000
+Number of hash functions used (optimal k): 4
+Total number of queries: 7257053
+Total number of false positives: 732757
+Experimental error: 0.100972
+Theoretical error (without any encryption): 0.1
+
+Time to add all strings to bloom filter: 0.000818002 seconds
+Time to do all querys: 5.18147 seconds
+
+n = 10000
+Number of hash functions used (optimal k): 4
+Total number of queries: 7257053
+Total number of false positives: 745247
+Experimental error: 0.102693
+Theoretical error (without any encryption): 0.1
+
+Time to add all strings to bloom filter: 0.00650063 seconds
+Time to do all querys: 5.35504 seconds
+
+n = 100000
+Number of hash functions used (optimal k): 4
+Total number of queries: 7257053
+Total number of false positives: 689744
+Experimental error: 0.0950446
+Theoretical error (without any encryption): 0.1
+
+Time to add all strings to bloom filter: 0.270283 seconds
+Time to do all querys: 5.52395 seconds
+
+n = 1000000
+Number of hash functions used (optimal k): 4
+Total number of queries: 7257053
+Total number of false positives: 345923
+Experimental error: 0.0476671
+Theoretical error (without any encryption): 0.1
+
+Time to add all strings to bloom filter: 0.697051 seconds
+Time to do all querys: 5.56355 seconds
