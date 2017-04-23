@@ -5,6 +5,7 @@
 #include <fstream>
 #include <set>
 #include <stdlib.h>
+#include <time.h>
 #include "libs/md5/md5.h"
 
 using namespace std;
@@ -53,6 +54,7 @@ int main () {
 	bool finished = false;
 
 	while(!finished){
+        time_t timer;
 		int entries, size_bloom, length;
 		double error;
 		cout << "-------------------------------------------" << endl;
@@ -61,7 +63,7 @@ int main () {
 		cout << "Length of entries: ";
 		cin >> length;
         
-        create_claus(entries, length, 3);
+        create_claus(entries, length, 3); //generates random entries number of strings of length lenth
         
 		cout << "Press 1 to create a Bloom filter by defining the size" << endl;
 		cout << "Press 2 to create a Bloom filter by defining the error" << endl;
@@ -86,9 +88,12 @@ int main () {
 			}
 			else cout << "Not a vaild command, please type 1 or 2" << endl;
 		}
-
+        
+        
+ 
         if (error == -1) {bloom_init_m(&bloom, entries, size_bloom); } //number of entries/size
-		else bloom_init(&bloom, entries, error);
+		else bloom_init(&bloom, entries, error); //number of entries/error
+
 		cout << "Press 1 to create a Bloom filter" << endl;
 		cout << "Press 2 to create a Bloom filter using sha256" << endl;
         cout << "Press 3 to create a Bloom filter using md5" << endl;
@@ -107,23 +112,35 @@ int main () {
 
         string line;
         ifstream myfile ("claus.txt");
+        time_t before_adding = clock();
+        float time_to_add = 0;
         bool entry_error = false;
         if (myfile.is_open()){
             while (getline (myfile,line)){
                 if (opt == 2) line = sha256(line);
                 else if (opt == 3) line = md5(line);
                 S.insert(line);
+                
+                time_t add = clock();
                 bloom_add(&bloom, &line, line.size());
+                time_to_add += float(clock() - add) / CLOCKS_PER_SEC;
+                
                 if (!bloom_check(&bloom, &line, line.size())) entry_error = true;
             }
         }
         if (entry_error) cout << "One or more of the strings hasn't been added succesfully" << endl;
+        //time_to_add = float(clock() - before_query) / CLOCKS_PER_SEC;
         
         int n = 0;
         int num_falsepositive = 0;
         int num_queries = 0;
         
-        while (n < 7){
+        cout << "Starting queries, might take a while..." << endl;
+        
+        time_t before_query;
+        before_query = clock();
+        float time_query;
+        while (n < 10){
             ++n;
             string query;
             ifstream testfile ("tests/test" + to_string(n) + ".txt");
@@ -140,13 +157,16 @@ int main () {
                 }
             }
         }
+        time_query = float(clock() - before_query) / CLOCKS_PER_SEC;
         
-        
+        cout << endl;
         cout << "Total number of queries: " << num_queries << endl;
         cout << "Total number of false positives: " << num_falsepositive << endl;
         cout << "Experimental error: " << (double)num_falsepositive/num_queries << endl;
-        cout << "Theoretical error: " << bloom.error << endl;
-        
+        cout << "Theoretical error (without any encryption): " << bloom.error << endl;
+        cout << endl;
+        cout << "Time to add all strings to bloom filter: " << time_to_add << " seconds" << endl;
+        cout << "Time to do all querys: " << time_query  <<  " seconds" << endl;
         bloom_free(&bloom); //free bloom for next use
     }
     
