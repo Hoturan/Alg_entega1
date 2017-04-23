@@ -58,16 +58,38 @@ int main () {
     int entries, size_bloom, length;
     double error;
     cout << "-------------------------------------------" << endl;
+    cout << "Creation of set S of entries:" << endl;
+    cout << "Press 1 to create random generated strings " << endl;
+    cout << "Press 2 to read password entries (from file) " << endl;
+    bool done = false;
+    bool pass = false;
+    while(!done){
+        int choice;
+        cout << "	Command: ";
+        cin >> choice;
+        if (choice == 1){
+            pass = false;
+            done = true;
+        }
+        else if (choice == 2){
+            pass = true;
+            done = true;
+        }
+        else cout << "Not a vaild command, please type 1 or 2" << endl;
+    }
+
     cout << "Number of entries: ";
     cin >> entries;
-    cout << "Length of entries: ";
-    cin >> length;
-        
-    create_claus(entries, length, 3); //generates random entries number of strings of length lenth
+    
+    if (!pass) {
+        cout << "Length of entries: ";
+        cin >> length;
+        create_claus(entries, length, 3); //generates random entries number of strings of length lenth
+    }
         
     cout << "Press 1 to create a Bloom filter by defining the size" << endl;
     cout << "Press 2 to create a Bloom filter by defining the error" << endl;
-    bool done = false;
+    done = false;
     while(!done){
         int choice;
         cout << "	Command: ";
@@ -109,16 +131,22 @@ int main () {
         else cout << "Not a vaild command, please type 1, 2 or 3" << endl;
     }
     string line;
-    ifstream myfile ("claus.txt");
+    string input_file;
+    if (pass) input_file = "tests/test8.txt";
+    else input_file = "claus.txt";
+    
+    ifstream myfile (input_file);
     float time_to_add;
     bool entry_error = false;
     time_t add = clock();
     if (myfile.is_open()){
-        while (getline (myfile,line)){
+        int k = 0;
+        while (getline (myfile,line) and k < entries){
+            ++k;
             if (opt == 2) line = sha256(line);
             else if (opt == 3) line = md5(line);
             S.insert(line);
-            
+        
             bloom_add(&bloom, &line, line.size());
             
             
