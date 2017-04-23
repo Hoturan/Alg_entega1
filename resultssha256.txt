@@ -1,55 +1,59 @@
 sha256
 
 n = 100
+Size of generated Bloom filter: 144
 Number of hash functions used (optimal k): 2
 Total number of queries: 7257053
-Total number of false positives: 1460
-Experimental error: 0.000201184
+Total number of false positives: 1376
+Experimental error: 0.000189609
 Theoretical error (without any encryption): 0.5
 
-Time to add all strings to bloom filter: 0.000831 seconds
-Time to do all querys: 47.6566 seconds
+Time to add all strings to bloom filter: 0.000778 seconds
+Time to do all queries: 38.3569 seconds
 
 
 n = 200
+Size of generated Bloom filter: 288
 Number of hash functions used (optimal k): 2
 Total number of queries: 7257053
-Total number of false positives: 357
-Experimental error: 4.91935e-05
+Total number of false positives: 313
+Experimental error: 4.31305e-05
 Theoretical error (without any encryption): 0.5
 
-Time to add all strings to bloom filter: 0.001687 seconds
-Time to do all querys: 47.8159 seconds
-
+Time to add all strings to bloom filter: 0.002373 seconds
+Time to do all queries: 38.3285 seconds
 
 n = 500
+Size of generated Bloom filter: 721
 Number of hash functions used (optimal k): 2
 Total number of queries: 7257053
-Total number of false positives: 48
-Experimental error: 6.61426e-06
+Total number of false positives: 60
+Experimental error: 8.26782e-06
 Theoretical error (without any encryption): 0.5
 
-Time to add all strings to bloom filter: 0.004132 seconds
-Time to do all querys: 46.9648 seconds
+Time to add all strings to bloom filter: 0.005951 seconds
+Time to do all queries: 37.8397 seconds
 
 
 n = 1000
+Size of generated Bloom filter: 1442
 Number of hash functions used (optimal k): 2
 Total number of queries: 7257053
-Total number of false positives: 13
-Experimental error: 1.79136e-06
+Total number of false positives: 11
+Experimental error: 1.51577e-06
 Theoretical error (without any encryption): 0.5
 
-Time to add all strings to bloom filter: 0.012552 seconds
-Time to do all querys: 46.7651 seconds
+Time to add all strings to bloom filter: 0.01094 seconds
+Time to do all queries: 38.4043 seconds
 
 
 n = 5000
+Size of generated Bloom filter: 7213
 Number of hash functions used (optimal k): 2
 Total number of queries: 7257053
-Total number of false positives: 0
-Experimental error: 0
+Total number of false positives: 2
+Experimental error: 2.75594e-07
 Theoretical error (without any encryption): 0.5
 
-Time to add all strings to bloom filter: 0.042673 seconds
-Time to do all querys: 47.2204 seconds
+Time to add all strings to bloom filter: 0.040746 seconds
+Time to do all queries: 37.7265 seconds

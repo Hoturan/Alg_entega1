@@ -158,6 +158,7 @@ int main () {
     time_query = float(clock() - timer) / CLOCKS_PER_SEC;
         
     cout << endl;
+    cout << "Size of generated Bloom filter: " << bloom.bits << endl;
     cout << "Number of hash functions used (optimal k): " << bloom.hashes << endl;
     cout << "Total number of queries: " << num_queries << endl;
     cout << "Total number of false positives: " << num_falsepositive << endl;
@@ -165,7 +166,7 @@ int main () {
     cout << "Theoretical error (without any encryption): " << bloom.error << endl;
     cout << endl;
     cout << "Time to add all strings to bloom filter: " << time_to_add << " seconds" << endl;
-    cout << "Time to do all querys: " << time_query  <<  " seconds" << endl;
+    cout << "Time to do all queries: " << time_query  <<  " seconds" << endl;
     bloom_free(&bloom); //free bloom for next use
     
 }
