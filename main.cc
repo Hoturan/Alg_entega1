@@ -9,6 +9,43 @@
 
 using namespace std;
 
+static const char let[] = "abcdefghijklmnopqrstuvwxyz";
+static const char num[] = "0123456789";
+static const char l[] = "abcdefghijklmnopqrstuvwxyz0123456789";
+int stringLength = sizeof(l) - 1;
+int numLength = sizeof(num) - 1;
+int letLength = sizeof(let) - 1;
+
+char getRandomletter() {
+    return let[rand() % letLength];
+}
+
+char getRandomnumber() {
+    return num[rand() % numLength];
+}
+
+char getRandom() {
+    return l[rand() % stringLength];
+}
+
+void create_claus(int num_strings, int length, int option) {
+    ofstream myfile;
+    myfile.open ("claus.txt");
+    
+    srand(time(0));
+
+    for (int i = 0; i < num_strings; i++) {
+        string p;
+        for (int j = 0; j < length; j++) {
+            if (option == 1) p+=getRandomletter();
+            else if (option == 2) p+=getRandomnumber();
+            else if (option == 3) p+=getRandom();
+        }
+        myfile << p << "\n";
+        
+    }
+    myfile.close();
+}
 
 int main () {
     set <string> S;
@@ -24,6 +61,7 @@ int main () {
 		cout << "Length of entries: ";
 		cin >> length;
         
+        create_claus(entries, length, 3);
         
 		cout << "Press 1 to create a Bloom filter by defining the size" << endl;
 		cout << "Press 2 to create a Bloom filter by defining the error" << endl;

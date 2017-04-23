@@ -27,7 +27,7 @@ char getRandom() {
 
 int main(int nargs, char* args[]) {
 	ofstream myfile;
-  	myfile.open ("test.txt");
+  	myfile.open ("claus.txt");
 	if (nargs != 3 and nargs != 4) {
 		cout << "usage: ./string_generator num_strings length (1..2)" << endl;
 		cout << "1 generates strings with only letters, 2 with only numbers." << endl;
