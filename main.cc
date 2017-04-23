@@ -135,8 +135,8 @@ int main () {
     
     cout << "Starting queries, might take a while..." << endl;
         
-    time_t before_query;
-    before_query = clock();
+    //time_t gongo_query;
+    timer = clock();
     float time_query;
     while (n < 10){
         ++n;
@@ -155,7 +155,7 @@ int main () {
             }
         }
     }
-    time_query = float(clock() - before_query) / CLOCKS_PER_SEC;
+    time_query = float(clock() - timer) / CLOCKS_PER_SEC;
         
     cout << endl;
     cout << "Number of hash functions used (optimal k): " << bloom.hashes << endl;
