@@ -1,0 +1,55 @@
+sha256
+
+n = 100
+Number of hash functions used (optimal k): 2
+Total number of queries: 7257053
+Total number of false positives: 1460
+Experimental error: 0.000201184
+Theoretical error (without any encryption): 0.5
+
+Time to add all strings to bloom filter: 0.000831 seconds
+Time to do all querys: 47.6566 seconds
+
+
+n = 200
+Number of hash functions used (optimal k): 2
+Total number of queries: 7257053
+Total number of false positives: 357
+Experimental error: 4.91935e-05
+Theoretical error (without any encryption): 0.5
+
+Time to add all strings to bloom filter: 0.001687 seconds
+Time to do all querys: 47.8159 seconds
+
+
+n = 500
+Number of hash functions used (optimal k): 2
+Total number of queries: 7257053
+Total number of false positives: 48
+Experimental error: 6.61426e-06
+Theoretical error (without any encryption): 0.5
+
+Time to add all strings to bloom filter: 0.004132 seconds
+Time to do all querys: 46.9648 seconds
+
+
+n = 1000
+Number of hash functions used (optimal k): 2
+Total number of queries: 7257053
+Total number of false positives: 13
+Experimental error: 1.79136e-06
+Theoretical error (without any encryption): 0.5
+
+Time to add all strings to bloom filter: 0.012552 seconds
+Time to do all querys: 46.7651 seconds
+
+
+n = 5000
+Number of hash functions used (optimal k): 2
+Total number of queries: 7257053
+Total number of false positives: 0
+Experimental error: 0
+Theoretical error (without any encryption): 0.5
+
+Time to add all strings to bloom filter: 0.042673 seconds
+Time to do all querys: 47.2204 seconds
